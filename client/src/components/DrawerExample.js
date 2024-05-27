@@ -7,9 +7,6 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  FormControl,
-  FormLabel,
-  Input,
   Stack,
 } from '@chakra-ui/react';
 import { GlobalContext } from '../context/GlobalWrapper';
@@ -17,7 +14,7 @@ import { useContext, useEffect, useState } from 'react';
 import InputsGroup from './InputsGroup';
 
 export default function DrawerExample() {
-  const { isOpen, onOpen, onClose, errors, setErrors, Save, user, Update, filePreview, setFilePreview } = useContext(GlobalContext);
+  const { isOpen, onClose, errors, setErrors, Save, user, Update, filePreview, setFilePreview } = useContext(GlobalContext);
   const [form, setForm] = useState({});
   const [file, setFile] = useState(null);
   
@@ -61,7 +58,7 @@ export default function DrawerExample() {
     if(user?.filename) {
       setFilePreview(`/images/users/${user.filename}`)
     }
-  }, [user])
+  }, [user, setFilePreview])
 
   return (
     <>

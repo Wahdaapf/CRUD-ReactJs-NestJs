@@ -5,12 +5,9 @@ import {
   FormControl,
   Input,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
-  Td,
   Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
@@ -22,12 +19,12 @@ import { GlobalContext } from './context/GlobalWrapper';
 import DrawerExample from './components/DrawerExample';
 
 function App() {
-  const { FetchUser, Search, users, isOpen, onOpen, onClose, errors, setErrors, Save } = useContext(GlobalContext);
+  const { FetchUser, Search, users, onOpen } = useContext(GlobalContext);
   const [ query, setQuery ] = useState('');
 
   useEffect(() => {
     FetchUser();
-  }, []);
+  }, [FetchUser]);
 
   const SearchHandler = () => {
     Search(query);
@@ -35,10 +32,6 @@ function App() {
 
   const onChangeHandler = (e) =>{
     setQuery(e.target.value)
-  }
-
-  const onAdd = (form) => {
-    Save(form)
   }
 
   return (
