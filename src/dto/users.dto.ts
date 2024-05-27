@@ -12,4 +12,6 @@ export class UserDto {
 
   @IsNotEmpty()
   country: string;
+
+  filename: string;
 }

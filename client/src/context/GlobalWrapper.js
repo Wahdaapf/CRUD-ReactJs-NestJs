@@ -5,6 +5,7 @@ import { useDisclosure, useToast } from '@chakra-ui/react';
 export const GlobalContext = createContext();
 
 export default function Wrapper({ children }) {
+  const [filePreview, setFilePreview] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [errors, setErrors] = useState({})
   const [users, setUsers] = useState([])
@@ -64,6 +65,7 @@ export default function Wrapper({ children }) {
         onClose()
         setUsers([...users, response.data])
         setForm({})
+        setFilePreview(null)
       })
       .catch(error => {
         setErrors(error.response.data.error)
@@ -95,13 +97,14 @@ export default function Wrapper({ children }) {
         onClose()
         FetchUser()
         setForm({})
+        setFilePreview(null)
       })
       .catch(error => {
         setErrors(error.response.data.error)
       });
   }
   return (
-    <GlobalContext.Provider value={{ FetchUser, Search, Save, Delete, users, isOpen, onOpen, onClose, errors, setErrors, FindOne, user, setUser, Update }}>
+    <GlobalContext.Provider value={{ FetchUser, Search, Save, Delete, users, isOpen, onOpen, onClose, errors, setErrors, FindOne, user, setUser, Update, filePreview, setFilePreview }}>
       {children}
     </GlobalContext.Provider>
   );

@@ -3,12 +3,15 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { ValidationException, ValidationFilter } from './util/filter.validation';
 import { ValidationError } from 'class-validator';
+import { join } from 'path';
+import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   //biar saat akses ditambahakan /api
-  app.setGlobalPrefix('/api');
-
+  app.setGlobalPrefix('/api', {
+    exclude: ['/images/(.*)'], // Mengecualikan rute untuk file statis
+  });
 
   //manggil fungsi, misal require name sama email
   //trs yang diisi name aja
@@ -19,7 +22,6 @@ async function bootstrap() {
     new ValidationPipe({
       skipMissingProperties: false,
       exceptionFactory: (errors: ValidationError[]) => {
-        console.log("Validation errors received:", errors)
         const errMsg = {};
         errors.forEach((err) => {
           const propertyName = err.property || 'general';

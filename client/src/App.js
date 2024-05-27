@@ -90,7 +90,7 @@ function App() {
                 </Tr>
               </Thead>
               <Tbody>
-                {users?.map(({ _id, fullname, email, age, country }) => {
+                {users?.map(({ _id, fullname, email, age, country, filename }) => {
                   return (
                     <Row
                       id={_id}
@@ -98,6 +98,7 @@ function App() {
                       email={email}
                       age={age}
                       country={country}
+                      filename={filename}
                     />
                   );
                 })}
